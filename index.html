@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TransTrack - Sistem Monitoring Teknisi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="auth-page">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>TransTrack</h1>
+                <p>Sistem Monitoring Pekerjaan Teknisi</p>
+            </div>
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" id="login-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="login-password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Role</label>
+                    <select id="login-role" class="form-control" required>
+                        <option value="">Pilih Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="support">Support</option>
+                        <option value="teknisi">Teknisi</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me"> Remember Me
+                    </label>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">Login</button>
+                <div class="auth-links">
+                    <a href="#" id="show-register">Daftar Akun Baru</a> | 
+                    <a href="#" id="show-forgot">Lupa Password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Page -->
+    <div id="register-page" class="auth-page" style="display: none;">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>Daftar Akun Baru</h1>
+                <p>TransTrack System</p>
+            </div>
+            <form id="register-form" class="auth-form">
+                <div class="form-group">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" id="register-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" id="register-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nomor HP</label>
+                    <input type="tel" id="register-phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="register-password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Konfirmasi Password</label>
+                    <input type="password" id="register-confirm" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">Daftar</button>
+                <div class="auth-links">
+                    <a href="#" id="show-login">Sudah punya akun? Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Page -->
+    <div id="forgot-page" class="auth-page" style="display: none;">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>Reset Password</h1>
+                <p>Masukkan email untuk reset password</p>
+            </div>
+            <form id="forgot-form" class="auth-form">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" id="forgot-email" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">Kirim Link Reset</button>
+                <div class="auth-links">
+                    <a href="#" id="back-to-login">Kembali ke Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="main-app" class="main-app" style="display: none;">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-left">
+                <button id="sidebar-toggle" class="btn btn--ghost">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="app-title">TransTrack</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-menu">
+                    <button class="user-menu-toggle">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="current-user-name">User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="user-menu-dropdown">
+                        <a href="#" id="user-profile"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#" id="user-settings"><i class="fas fa-cog"></i> Settings</a>
+                        <hr>
+                        <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="tickets">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span>Tiket</span>
+                </a>
+                <a href="#" class="nav-item" data-page="customers">
+                    <i class="fas fa-building"></i>
+                    <span>Customer</span>
+                </a>
+                <a href="#" class="nav-item" data-page="units">
+                    <i class="fas fa-truck"></i>
+                    <span>Unit Kendaraan</span>
+                </a>
+                <a href="#" class="nav-item" data-page="inventory">
+                    <i class="fas fa-boxes"></i>
+                    <span>Inventory</span>
+                </a>
+                <a href="#" class="nav-item" data-page="reports">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Laporan</span>
+                </a>
+                <a href="#" class="nav-item admin-only" data-page="users">
+                    <i class="fas fa-users"></i>
+                    <span>User Management</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div id="dashboard-content" class="page-content">
+                <div class="page-header">
+                    <h2>Dashboard</h2>
+                    <div class="page-actions">
+                        <button class="btn btn--primary" id="create-ticket-btn">
+                            <i class="fas fa-plus"></i> Buat Tiket Baru
+                        </button>
+                    </div>
+                </div>
+
+                <!-- KPI Cards -->
+                <div class="kpi-grid" id="kpi-cards">
+                    <!-- KPI cards will be populated by JavaScript -->
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Status Tiket</h3>
+                        <canvas id="status-chart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Tren Performance</h3>
+                        <canvas id="trend-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Aktivitas Terbaru</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="activity-feed">
+                            <!-- Activity items will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other page contents will be added here -->
+            <div id="tickets-content" class="page-content" style="display: none;">
+                <div class="page-header">
+                    <h2>Manajemen Tiket</h2>
+                    <div class="page-actions">
+                        <button class="btn btn--primary" id="add-ticket-btn">
+                            <i class="fas fa-plus"></i> Tambah Tiket
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <input type="text" id="ticket-search" placeholder="Cari tiket..." class="form-control">
+                    </div>
+                    <div class="filter-group">
+                        <select id="status-filter" class="form-control">
+                            <option value="">Semua Status</option>
+                            <option value="Open">Open</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Done">Done</option>
+                            <option value="Overdue">Overdue</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <select id="priority-filter" class="form-control">
+                            <option value="">Semua Prioritas</option>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                            <option value="Critical">Critical</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Tickets Table -->
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer</th>
+                                    <th>Unit</th>
+                                    <th>Tipe</th>
+                                    <th>Prioritas</th>
+                                    <th>Status</th>
+                                    <th>Teknisi</th>
+                                    <th>Deadline</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tickets-table-body">
+                                <!-- Table rows will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add other page contents here (customers, units, inventory, reports, users) -->
+            <div id="customers-content" class="page-content" style="display: none;">
+                <div class="page-header">
+                    <h2>Manajemen Customer</h2>
+                    <div class="page-actions">
+                        <button class="btn btn--primary" id="add-customer-btn">
+                            <i class="fas fa-plus"></i> Tambah Customer
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nama</th>
+                                    <th>Kontak</th>
+                                    <th>Telepon</th>
+                                    <th>SLA</th>
+                                    <th>Status Kontrak</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customers-table-body">
+                                <!-- Table rows will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more page contents as needed -->
+        </main>
+    </div>
+
+    <!-- Modals will be added here -->
+    <div id="modal-overlay" class="modal-overlay" style="display: none;"></div>
+    <div id="ticket-modal" class="modal" style="display: none;">
+        <!-- Modal content will be populated by JavaScript -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
